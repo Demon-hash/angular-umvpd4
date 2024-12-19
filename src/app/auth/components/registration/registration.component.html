@@ -1,0 +1,103 @@
+<h2>Create an account</h2>
+<form id="user-form" [formGroup]="form">
+  <div
+    class="form-input"
+    [class.invalid-input]="isInvalidFormControl(FIELDS.USERNAME)"
+  >
+    <label [for]="FIELDS.USERNAME">Username:</label>
+    <input
+      type="text"
+      [formControlName]="FIELDS.USERNAME"
+      [id]="FIELDS.USERNAME"
+    />
+    <ng-container *ngIf="isInvalidFormControl(FIELDS.USERNAME)">
+      <small *ngIf="form.get(FIELDS.USERNAME).hasError('required')">
+        Required
+      </small>
+      <small *ngIf="form.get(FIELDS.USERNAME).hasError('minlength')">
+        Min length should be
+        {{ form.get(FIELDS.USERNAME).errors.minlength.requiredLength }}
+      </small>
+      <small *ngIf="form.get(FIELDS.USERNAME).hasError('maxlength')">
+        Max length should be
+        {{ form.get(FIELDS.USERNAME).errors.maxlength.requiredLength }}
+      </small>
+    </ng-container>
+  </div>
+
+  <div
+    class="form-input"
+    [class.invalid-input]="isInvalidFormControl(FIELDS.EMAIL)"
+  >
+    <label [for]="FIELDS.EMAIL">Email:</label>
+    <input type="email" [formControlName]="FIELDS.EMAIL" [id]="FIELDS.EMAIL" />
+    <ng-container *ngIf="isInvalidFormControl(FIELDS.EMAIL)">
+      <small *ngIf="form.get(FIELDS.EMAIL).hasError('required')">
+        Required
+      </small>
+      <small *ngIf="form.get(FIELDS.EMAIL).hasError('email')">
+        Incorrect email address
+      </small>
+    </ng-container>
+  </div>
+
+  <div
+    class="form-input"
+    [class.invalid-input]="isInvalidFormControl(FIELDS.PASSWORD)"
+  >
+    <label [for]="FIELDS.PASSWORD">Password:</label>
+    <input
+      type="password"
+      [formControlName]="FIELDS.PASSWORD"
+      [id]="FIELDS.PASSWORD"
+    />
+    <ng-container *ngIf="isInvalidFormControl(FIELDS.PASSWORD)">
+      <small *ngIf="form.get(FIELDS.PASSWORD).hasError('required')">
+        Required
+      </small>
+      <small *ngIf="form.get(FIELDS.PASSWORD).hasError('minlength')">
+        Min length should be
+        {{ form.get(FIELDS.PASSWORD).errors.minlength.requiredLength }}
+      </small>
+      <small *ngIf="form.get(FIELDS.PASSWORD).hasError('maxlength')">
+        Max length should be
+        {{ form.get(FIELDS.PASSWORD).errors.maxlength.requiredLength }}
+      </small>
+      <small *ngIf="form.get(FIELDS.PASSWORD).hasError('uppercase')">
+        Password must have upper case char(s)
+      </small>
+      <small *ngIf="form.get(FIELDS.PASSWORD).hasError('lowercase')">
+        Password must have lower case char(s)
+      </small>
+      <small *ngIf="form.get(FIELDS.PASSWORD).hasError('specialchar')">
+        Password must have special char(s)
+      </small>
+    </ng-container>
+  </div>
+
+  <div
+    class="form-select"
+    [class.invalid-input]="isInvalidFormControl(FIELDS.TYPE)"
+  >
+    <label [for]="FIELDS.TYPE">User type:</label>
+    <select [formControlName]="FIELDS.TYPE" [id]="FIELDS.TYPE">
+      <option *ngFor="let type of USER_TYPE | keyvalue" [value]="type.value">
+        {{ type.value }}
+      </option>
+    </select>
+    <ng-container *ngIf="isInvalidFormControl(FIELDS.TYPE)">
+      <small *ngIf="form.get(FIELDS.TYPE).hasError('required')">Required</small>
+    </ng-container>
+  </div>
+
+  <button
+    form="user-form"
+    type="submit"
+    [disabled]="form.invalid || (isLoading$ | async)"
+    (click)="onSubmit()"
+  >
+    Create an account
+  </button>
+  <h4><span>OR</span></h4>
+  <button>Login</button>
+</form>

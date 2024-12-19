@@ -1,0 +1,43 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input,
+.form-select {
+  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+}
+
+.invalid-input > input,
+.invalid-input > select {
+  border: 1px solid red;
+}
+
+.invalid-input > label,
+.invalid-input > small {
+  color: red;
+}
+
+button[type='submit'] {
+  margin-top: 8px;
+}
+
+h2 {
+  text-align: center;
+}
+
+h4 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 25px 0 20px;
+}
+
+h4 span {
+  background: #fff;
+  padding: 0 10px;
+}
